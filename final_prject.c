@@ -1,5 +1,13 @@
+//Authors:Nathan Lock, Andrew Smith, Diego Reyes Ortiz
+//Final Group Project MadLibs
+//Date: 10 December 2024
+
+
+
+
+
 #include <stdio.h>
-#define STRING_CAP 1024
+#define STRING_CAP 100
 #define MAD1 "madlib1.txt"
 #define RMAX 30
 #define CMAX 50
@@ -24,8 +32,9 @@ char verb[STRING_CAP];
 
 
 mad1 = fopen(MAD1,"r");
+
 if(mad1 == NULL){
-printf("Unable to open madlib1\n");
+	printf("Unable to open madlib1\n");
 return 0;
 }
 
@@ -35,40 +44,41 @@ fclose(mad1);
 
 
 for(int i = 0; i < totalLines; i++){
-
- if (content[i][0] == 'A'){
-	get_adjective(adjective);
-	for (int j = 0; j< STRING_CAP;j++){
-	
-	contentWithInput[i][j] = adjective[j];
+	int j = 0;
+	 if (content[i][0] == 'A'){
+		get_adjective(adjective);
+		for (int j = 0; adjective[j] != '\0' && j < STRING_CAP - 1;j++){
+		
+			contentWithInput[i][j] = adjective[j];
+		}
+	 	
+	 }
+	 else if (content[i][0]== 'N'){
+	 		get_noun( noun);
+	 		for (int j = 0; noun[j] != '\0'&& j < STRING_CAP - 1 ;j++){
+				contentWithInput[i][j] = noun[j];
+		}
+	 	
+	 	contentWithInput[i][j] = '\0';
+	 }
+	 else if(content[i][0]=='V'){
+	 		get_verb( verb);
+	 			for (int j = 0; verb[j] != '\0' && j < STRING_CAP - 1; j++){
+					contentWithInput[i][j] = verb[j];
+		}
+	 	contentWithInput[i][j] = '\0';
+	 }
+	 else{
+	 
+	 	for (int j = 0; j != '\0' ;j++){
+		 	if (content[i][j] != '\n'){
+			contentWithInput[i][j] = content[i][j];
+			}
+		 	contentWithInput[i][j] = '\0';
+	 }
+	 	
+	 
 	}
- 	
- }
- else if (content[i][0]== 'N'){
- 	get_noun( noun);
- 	for (int j = 0; j< STRING_CAP;j++){
-	contentWithInput[i][j] = noun[j];
-	}
- 
- }
- else if(content[i][0]=='V'){
- 	get_verb( verb);
- 	for (int j = 0; j< STRING_CAP;j++){
-	contentWithInput[i][j] = verb[j];
-	}
- 
- }
- else{
- 
- for (int j = 0; j< CMAX;j++){
- 	if (content[i][j] != '\n'){
-	contentWithInput[i][j] = content[i][j];
-	}
- 
- }
- 
- 
-}
 
 
 
